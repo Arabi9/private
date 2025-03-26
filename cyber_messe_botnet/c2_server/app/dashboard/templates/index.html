@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CYBERCOM DASHBOARD v4.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="/static/quantum.js"></script>
+</head>
+<body>
+    <div id="terminal" style="background: #000; color: #0f0"></div>
+    <script>
+        const quantumChannel = new QuantumChannel('botnet_ssid');
+        quantumChannel.onData(data => {
+            const particles = new THREE.Geometry();
+            data.bots.forEach(bot => {
+                particles.vertices.push(
+                    new THREE.Vector3(bot.x, bot.y, bot.z)
+                );
+            });
+            const system = new THREE.ParticleSystem(particles);
+            scene.add(system);
+        });
+    </script>
+</body>
+</html>
